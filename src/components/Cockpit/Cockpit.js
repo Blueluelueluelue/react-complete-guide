@@ -1,10 +1,12 @@
-import React, { useEffect, Fragment, useRef } from 'react'
+import React, { useEffect, Fragment, useRef, useContext } from 'react'
 import withClass from '../hoc/withClass'
 import AuthContext from '../../context/auth-context'
 import classes from './Cockpit.module.css'
 
 const Cockpit = (props) => {
   const toggleButtonRef = useRef()
+  const authContext = useContext(AuthContext)
+  console.log('[Cockpit.js] Context', authContext)
 
   useEffect(() => {
     console.log('[Cockpit.js] useEffect')
@@ -32,17 +34,8 @@ const Cockpit = (props) => {
         ref={toggleButtonRef}
         className={btnClass}
         onClick={props.click}>Toggle Persons</button>
-
-      <AuthContext.Consumer>
-        {(context) => {
-          return (
-            <Fragment>
-              <button onClick={context.login}>Login</button>
-              <button onClick={context.logout} className={classes.Red}>Logout</button>
-            </Fragment>
-          )
-        }}  
-      </AuthContext.Consumer>  
+        <button onClick={authContext.login}>Login</button>
+        <button onClick={authContext.logout} className={classes.Red}>Logout</button>
     </Fragment>
   )
 }
