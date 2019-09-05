@@ -1,5 +1,6 @@
 import React, { useEffect, Fragment, useRef } from 'react'
 import withClass from '../hoc/withClass'
+import AuthContext from '../../context/auth-context'
 import classes from './Cockpit.module.css'
 
 const Cockpit = (props) => {
@@ -28,10 +29,20 @@ const Cockpit = (props) => {
       <h1>{props.title}</h1>
       <p className={assignedClasses.join(' ')}>This is really working</p>
       <button
-      ref={toggleButtonRef}
-      className={btnClass}
-      onClick={props.click}>Toggle Persons</button>
-      <button>Login</button>
+        ref={toggleButtonRef}
+        className={btnClass}
+        onClick={props.click}>Toggle Persons</button>
+
+      <AuthContext.Consumer>
+        {(context) => {
+          return (
+            <Fragment>
+              <button onClick={context.login}>Login</button>
+              <button onClick={context.logout} className={classes.Red}>Logout</button>
+            </Fragment>
+          )
+        }}  
+      </AuthContext.Consumer>  
     </Fragment>
   )
 }

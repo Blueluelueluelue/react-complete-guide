@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
+import AuthContext from '../context/auth-context'
 import classes from './App.module.css';
 
 class App extends Component {
@@ -14,7 +15,8 @@ class App extends Component {
       ],
       otherState: 'some other value',
       showPersons: false,
-      showCockpit: true
+      showCockpit: true,
+      authenticated: false
     }
     console.log('[App.js] constructor')
   }
@@ -56,6 +58,14 @@ class App extends Component {
     })
   }
 
+  loginHandler = () => {
+    this.setState({ authenticated: true })
+  }
+
+  logoutHandler = () => {
+    this.setState({ authenticated: false })
+  }
+
   render() {
     let persons = null
     console.log('[App.js] render')
@@ -77,14 +87,21 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <button onClick={this.toggleCockpitHandler}>Toggle Cockpit</button>
-        {this.state.showCockpit ? 
-        <Cockpit 
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          persons={this.state.persons}
-          click={this.togglePersonHandler}
-        /> : null}
-        {persons}
+        <AuthContext.Provider 
+        value={{
+          authenticated: this.state.authenticated,
+          login: this.loginHandler, 
+          logout: this.logoutHandler}}
+          >
+          {this.state.showCockpit ? 
+            <Cockpit 
+              title={this.props.appTitle}
+              showPersons={this.state.showPersons}
+              persons={this.state.persons}
+              click={this.togglePersonHandler}
+            /> : null}
+          {persons}
+        </AuthContext.Provider>
       </div>
     );
   }  
