@@ -15,6 +15,16 @@ class App extends Component {
       otherState: 'some other value',
       showPersons: false
     }
+    console.log('[App.js] constructor')
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps')
+    return state
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount')
   }
 
   nameChangeHandler = ( event, id ) => {
@@ -41,7 +51,7 @@ class App extends Component {
 
   render() {
     let persons = null
-    
+    console.log('[App.js] render')
 
     if (this.state.showPersons) {
       persons = (
@@ -60,6 +70,7 @@ class App extends Component {
     return (
       <div className={classes.App}>
           <Cockpit 
+            title={this.props.appTitle}
             showPersons={this.state.showPersons}
             persons={this.state.persons}
             click={this.togglePersonHandler}
