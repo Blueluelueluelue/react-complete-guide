@@ -1,4 +1,5 @@
 import React, { useEffect, Fragment, useRef } from 'react'
+import withClass from '../hoc/withClass'
 import classes from './Cockpit.module.css'
 
 const Cockpit = (props) => {
@@ -24,17 +25,15 @@ const Cockpit = (props) => {
   }    
   return (
     <Fragment>
-      <div className={classes.Cockpit}>
-          <h1>{props.title}</h1>
-          <p className={assignedClasses.join(' ')}>This is really working</p>
-          <button
-          ref={toggleButtonRef}
-          className={btnClass}
-          onClick={props.click}>Toggle Persons</button>
-      </div>
-      <h2>Hello</h2>
+      <h1>{props.title}</h1>
+      <p className={assignedClasses.join(' ')}>This is really working</p>
+      <button
+      ref={toggleButtonRef}
+      className={btnClass}
+      onClick={props.click}>Toggle Persons</button>
+      <button>Login</button>
     </Fragment>
   )
 }
 
-export default Cockpit
+export default withClass(Cockpit, classes.Cockpit)

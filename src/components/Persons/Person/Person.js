@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
+import withClass from '../../hoc/withClass'
 import classes from './Person.module.css'
 class Person extends Component {
     constructor(props) {
@@ -12,15 +13,15 @@ class Person extends Component {
 
     render() {
         return (
-            <div className={classes.Person}>
+            <Fragment>
                 <h2 onClick={this.props.click}>Hello My name is {this.props.name} and I am {this.props.age} years old.</h2>
                 <input 
                 ref={this.inputElementRef}
                 onChange={this.props.change} 
                 value={this.props.name}></input>
-            </div>
+            </Fragment>
         )
     }
 }
 
-export default Person
+export default withClass(Person, classes.Person)
