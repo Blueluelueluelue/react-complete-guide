@@ -13,7 +13,8 @@ class App extends Component {
         { id: 'afvcd', name: 'Holo', age: 30 }
       ],
       otherState: 'some other value',
-      showPersons: false
+      showPersons: false,
+      showCockpit: true
     }
     console.log('[App.js] constructor')
   }
@@ -49,6 +50,12 @@ class App extends Component {
     this.setState( { showPersons: !doesShow } )
   }
 
+  toggleCockpitHandler = () => {    
+    this.setState((prevState) => { 
+      return { showCockpit: !prevState.showCockpit }
+    })
+  }
+
   render() {
     let persons = null
     console.log('[App.js] render')
@@ -69,13 +76,15 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-          <Cockpit 
-            title={this.props.appTitle}
-            showPersons={this.state.showPersons}
-            persons={this.state.persons}
-            click={this.togglePersonHandler}
-          />
-          {persons}
+        <button onClick={this.toggleCockpitHandler}>Toggle Cockpit</button>
+        {this.state.showCockpit ? 
+        <Cockpit 
+          title={this.props.appTitle}
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          click={this.togglePersonHandler}
+        /> : null}
+        {persons}
       </div>
     );
   }  
