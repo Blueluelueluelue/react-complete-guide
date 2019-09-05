@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import withClass from '../../hoc/withClass'
 import classes from './Person.module.css'
 class Person extends Component {
@@ -22,6 +23,13 @@ class Person extends Component {
             </Fragment>
         )
     }
+}
+
+Person.propTypes = {
+    name: PropTypes.string,
+    change: PropTypes.func,
+    click: PropTypes.func,
+    age: PropTypes.number
 }
 
 export default withClass(Person, classes.Person)
