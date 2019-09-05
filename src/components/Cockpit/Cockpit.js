@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import Auxilliary from '../hoc/Auxilliary'
+import React, { useEffect, Fragment } from 'react'
 import classes from './Cockpit.module.css'
 
 const Cockpit = (props) => {
@@ -19,7 +18,7 @@ const Cockpit = (props) => {
     assignedClasses.push( classes.bold )
   }    
   return (
-    <Auxilliary>
+    <Fragment>
       <div className={classes.Cockpit}>
           <h1>{props.title}</h1>
           <p className={assignedClasses.join(' ')}>This is really working</p>
@@ -28,7 +27,7 @@ const Cockpit = (props) => {
           onClick={props.click}>Toggle Persons</button>
       </div>
       <h2>Hello</h2>
-    </Auxilliary>
+    </Fragment>
   )
 }
 
