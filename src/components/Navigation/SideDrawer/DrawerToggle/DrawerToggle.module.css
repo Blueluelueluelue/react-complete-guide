@@ -1,15 +1,23 @@
-.NavigationItems {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+.DrawerToggle {
+    width: 40px;
+    height: 100%;
     display: flex;
     flex-flow: column;
+    justify-content: space-around;
     align-items: center;
-    height: 100%;
+    padding: 10px 0;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.DrawerToggle div {
+    width: 90%;
+    height: 3px;
+    background-color: white;
 }
 
 @media (min-width: 500px) {
-    .NavigationItems {
-        flex-flow: row;
+    .DrawerToggle {
+        display: none;
     }
 }
